@@ -28,10 +28,11 @@ export function GenerateComplexeTextInput() {
 
   option.cursorStyle = new TextInputCursorStyle();
   option.cursorStyle.distance = 0;
-  option.cursorStyle.colorBlind = { color: 0xff0000, aplha: 1 };
-  option.cursorStyle.colorLow = { color: 0x000000, aplha: 0.5 };
+  option.cursorStyle.colorBlind = { color: 0xff0000, alpha: 1 };
+  option.cursorStyle.colorLow = { color: 0x00ffff, alpha: 0.5 };
   option.cursorStyle.width = 10;
   option.cursorStyle.speedSwap = 200;
+  console.log(option.cursorStyle)
   var input = new TextInput(option);
 
   input.x = 10;

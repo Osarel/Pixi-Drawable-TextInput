@@ -97,13 +97,16 @@ app.stage.addChild(input);
 The project is open to any new proposal and correction pull request and issues I will take the necessary measures to advance the project
 
 ### V1.0.2
+
 - [x] Add development test server
 - [x] Fix placeholder
-- [ ] Fix alpha cursor
-- [] Fix input out of field
+- [x] Fix alpha cursor
+- [ ] Fix input out of field
+- [ ] Create a documentation
+
 - [x] Fix cursor field empty
 
 ### Futur
-- [ ] Create a documentation
+
 - [ ] Add mobile support
 - [ ] Cursor up when key up and down when key down
