@@ -1,7 +1,6 @@
 # Pixi-Drawable-TextInput
  You need to create a text input with pixi but you don't want to use the dom of the canvas, this plugin allows you to draw your own text input
 
-***
 
 ## Installation :
 You can install pixi drawable text input with standard npm
@@ -12,11 +11,10 @@ Or with yarn
 
 `yarn add pixi-drawable-textinput`
 
-***
 
 ## Use :
 
-###Simple text input
+### Simple text input
 ```typescript
 import "./styles.css";
 import * as PIXI from "pixi.js";
@@ -38,7 +36,7 @@ app.stage.addChild(input);
 
 [Test online](https://codesandbox.io/s/simple-pixi-textinput-6dk8b)
 
-###Complexe text input
+### Complexe text input
 
 ```typescript
 import * as PIXI from "pixi.js";
@@ -93,3 +91,19 @@ app.stage.addChild(input);
 ```
 
 [Test online](https://codesandbox.io/s/complexe-pixi-textinput-zwmtw)
+
+## to-do list
+
+The project is open to any new proposal and correction pull request and issues I will take the necessary measures to advance the project
+
+### V1.0.2
+- [x] Add development test server
+- [x] Fix placeholder
+- [ ] Fix alpha cursor
+- [ ] Fix input out of field
+- [ ] Fix cursor field empty
+
+### Futur
+- [ ] Create a documentation
+- [ ] Add mobile support
+- [ ] Cursor up when key up and down when key down

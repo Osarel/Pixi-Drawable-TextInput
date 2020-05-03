@@ -2,22 +2,34 @@
   "name": "pixi-drawable-textinput",
   "version": "1.0.1",
   "main": "dist/TextInput.js",
-  "types" : "dist/TextInput.d.ts",
+  "types": "dist/TextInput.d.ts",
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "startTest": "parcel exemple/index.html -d .cache --open"
   },
   "repository": "https://github.com/Osarel/Pixi-Drawable-TextInput.git",
   "author": "Osarel <raphael.carvalho39@hotmail.com>",
   "license": "MIT",
-  "keywords": ["PIXI", "pixi.js", "pixi", "JavaScript", "TypeScript", "Input", "TextInput", "Text"],
+  "keywords": [
+    "PIXI",
+    "pixi.js",
+    "pixi",
+    "JavaScript",
+    "TypeScript",
+    "Input",
+    "TextInput",
+    "Text"
+  ],
   "bugs": {
     "url": "https://github.com/Osarel/Pixi-Drawable-TextInput/issues"
-   },
-   "homepage":"https://github.com/Osarel/Pixi-Drawable-TextInput#readme",
+  },
+  "homepage": "https://github.com/Osarel/Pixi-Drawable-TextInput#readme",
   "devDependencies": {
+    "parcel-bundler": "^1.12.4",
     "typescript": "^3.8.3"
   },
   "dependencies": {
+    "pixi-drawable-textinput": "^1.0.1",
     "pixi.js": "^5.2.3"
   }
 }

@@ -257,7 +257,6 @@ export default class TextInput extends PIXI.Container {
     }
 
     this.fireTextChange(lastText, newText, this.cursorPosition + 1)
-
   }
 
   addStringIntoStringAt(key: string, index: number, value: string) : string{
@@ -301,6 +300,7 @@ export default class TextInput extends PIXI.Container {
   }
 
   fireTextChange(lastValue: string, newValue: string, cursorPosition: number){
+    this.options.value = newValue
     this.textComponent.text = newValue
 
     this.cursorPosition = cursorPosition
@@ -409,6 +409,9 @@ export default class TextInput extends PIXI.Container {
     this.displayBackground(true)
     this.AddEvent()
     this.isFocus = true
+    console.log("focus")
+    //remove placeholder
+    this.textComponent.text = this.options.value
     if(this.options.onFocus != undefined){
       this.options.onFocus()
     }
@@ -421,6 +424,11 @@ export default class TextInput extends PIXI.Container {
     this.displayBackground(false)
     this.RemoveEvent()
     this.displayCursor(false, false, {x: 0, y:0})
+
+    //regenerate display
+    this.textComponent.text = this.GenerateValueDisplay()
+
+
     this.isFocus = false
     if(this.options.onBlur != undefined){
       this.options.onBlur()
