@@ -100,8 +100,8 @@ The project is open to any new proposal and correction pull request and issues I
 - [x] Add development test server
 - [x] Fix placeholder
 - [ ] Fix alpha cursor
-- [ ] Fix input out of field
-- [ ] Fix cursor field empty
+- [] Fix input out of field
+- [x] Fix cursor field empty
 
 ### Futur
 - [ ] Create a documentation

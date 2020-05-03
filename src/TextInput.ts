@@ -200,7 +200,7 @@ export default class TextInput extends PIXI.Container {
     }
     var lastText = this.textComponent.text
     //touche suppr
-    if (event.keyCode == 8) {
+    if (event.keyCode == 8 && lastText.length > 0) {
       this.fireTextChange(lastText, lastText.slice(0, this.cursorPosition - 1) + lastText.slice(this.cursorPosition), this.cursorPosition-1)
       return
     }
