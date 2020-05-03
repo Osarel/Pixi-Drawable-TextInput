@@ -4,8 +4,8 @@
   "main": "dist/TextInput.js",
   "types": "dist/TextInput.d.ts",
   "scripts": {
-    "build": "tsc",
-    "startTest": "parcel exemple/index.html -d .cache --open"
+    "startTest": "parcel exemple/index.html -d .cache --open",
+    "build": "npx tsc"
   },
   "repository": "https://github.com/Osarel/Pixi-Drawable-TextInput.git",
   "author": "Osarel <raphael.carvalho39@hotmail.com>",
