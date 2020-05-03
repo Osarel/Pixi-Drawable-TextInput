@@ -3,7 +3,7 @@
 
 ***
 
-###Installation :
+### Installation :
 You can install pixi drawable text input with standard npm
 `npm install pixi-drawable-textinput`
 Or with yarn
@@ -11,7 +11,7 @@ Or with yarn
 
 ***
 
-###Use :
+### Use :
 
 Simple text input
 ```typescript
