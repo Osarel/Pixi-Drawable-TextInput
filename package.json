@@ -1,0 +1,23 @@
+{
+  "name": "pixi-drawable-textinput",
+  "version": "1.0.0",
+  "description": "You need to create a text input with pixi.js but you don't want to use the dom of the canvas, this plugin allows you to draw your own text input",
+  "main": "dist/TextInput.js",
+  "types" : "dist/TextInput.d.ts",
+  "scripts": {
+    "build": "tsc"
+  },
+  "repository": "https://github.com/Osarel/Pixi-Drawable-TextInput.git",
+  "author": "Osarel <raphael.carvalho39@hotmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Osarel/Pixi-Drawable-TextInput/issues"
+   },
+   "homepage":"https://github.com/Osarel/Pixi-Drawable-TextInput#readme",
+  "devDependencies": {
+    "typescript": "^3.8.3"
+  },
+  "dependencies": {
+    "pixi.js": "^5.2.3"
+  }
+}
