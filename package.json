@@ -1,11 +1,13 @@
 {
   "name": "pixi-drawable-textinput",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "dist/TextInput.js",
   "types": "dist/TextInput.d.ts",
+  "description": "You need to create a text input with pixi but you don't want to use the dom of the canvas, this plugin allows you to draw your own text input",
   "scripts": {
-    "startTest": "parcel exemple/index.html -d .cache --open",
-    "build": "npx tsc"
+    "start": "parcel exemple/index.html -d .cache --open",
+    "build": "npx tsc",
+    "doc": "npx typedoc --out docs"
   },
   "repository": "https://github.com/Osarel/Pixi-Drawable-TextInput.git",
   "author": "Osarel <raphael.carvalho39@hotmail.com>",
@@ -23,9 +25,10 @@
   "bugs": {
     "url": "https://github.com/Osarel/Pixi-Drawable-TextInput/issues"
   },
-  "homepage": "https://github.com/Osarel/Pixi-Drawable-TextInput#readme",
+  "homepage": "https://osarel.github.io/Pixi-Drawable-TextInput/",
   "devDependencies": {
     "parcel-bundler": "^1.12.4",
+    "typedoc": "^0.17.6",
     "typescript": "^3.8.3"
   },
   "dependencies": {

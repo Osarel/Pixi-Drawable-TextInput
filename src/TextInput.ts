@@ -1,18 +1,48 @@
 import * as PIXI from 'pixi.js'
 
+/**
+ * Cursor style class
+ */
 export class TextInputCursorStyle {
+  /**
+   * Width of the cursor
+   */
   width: number = 4
+  /**
+  Color on blind
+  */
   colorBlind: TextInputColor = { color: 0x69a7ff, alpha: 1 }
+  /**
+   * Color on low
+   */
   colorLow: TextInputColor = { color: 0x69a7ff, alpha: 0.5 }
+  /**
+   * Distance from text
+   */
   distance: number = 6
+  /**
+   * Swap speed of the cursor
+   */
   speedSwap: number = 500
 }
-
+/**
+ * Color class
+ */
 export class TextInputColor {
+  /**
+   * @description
+   * An hexadecimal number of color exemple  '0x000000'
+   */
   color: number = 0x000000
+  /**
+   * @description
+   * A alpha color need to be from 0 to 1
+   */
   alpha: number = 1
 }
-
+/**
+ * PIXI text input style
+ */
 export class TextInputFontStyle {
   fontFamily?: string = "Arial"
   fontSize: number = 14
@@ -27,73 +57,197 @@ export class TextInputFontStyle {
   dropShadowAngle?: number
   dropShadowDistance?: number
 }
-
+/**
+ * Text input settings class
+ */
 export class TextInputOption {
+  /**
+   * Color of the background
+   */
   backgroundColor: TextInputColor = { color: 0xffffff, alpha: 0.5 }
+  /**
+   * Color of the background when focus
+   */
   backgroundColorFocus: TextInputColor = { color: 0xffffff, alpha: 1 }
 
+  /**
+   * Width of the input it was static
+   */
   width: number = 120
+  /**
+   * Height of the input it was dynamic if input is multiline
+   */
   height: number = 25
+  /**
+   * Padding height on text
+   */
+  paddingHeight: number = 10
+  /**
+   * Max Height of the input use in multiline input
+   */
   maxHeight?: number
 
+  /**
+   * Style of the input text
+   */
   style: TextInputFontStyle = new TextInputFontStyle()
+  /**
+   * Placeholder when input is empty and blur
+   */
   placeHolder: string = ""
+  /**
+   * Current value
+   */
   value: string = ""
+  /**
+   * Max length of value
+   */
   maxLength: number = -1
 
+  /**
+   * Border style rounded
+   */
   roundedBorder: number = 0
+  /**
+   * Border style color
+   */
   borderColor: TextInputColor = { color: 0, alpha: 1 }
+  /**
+   * Border style color on focus
+   */
   borderColorFocus: TextInputColor = { color: 0, alpha: 1 }
+  /**
+   * Border width
+   */
   borderWidth: number = 2
 
+  /**
+   * If multiline height is dynamics
+   * wordWrapType take effect and wrap word when is to huge
+   * default is false
+   */
   multiLine: boolean = false
+  /**
+   * Word wrap type
+   * break-work :  break word at last space characters
+   * break-all : break word at last characters
+  */
   wordWrapType: "break-word" | "break-all" = "break-word"
+  /**
+   * Only allow Number typing in the text input
+   * Default is false
+  */
   onlyNumber: boolean = false
+  /**
+   * if only number set minimum number to reach
+   * Default is Number.MIN_VALUE
+  */
   min: number = Number.MIN_VALUE
+  /**
+   * if only number set maximum number to reach
+   * Default is Number.MAX_VALUE
+  */
   max: number = Number.MAX_VALUE
 
+  /**
+   * Change cursor style
+   */
   cursorStyle: TextInputCursorStyle = new TextInputCursorStyle()
+  /**
+   * Enable or disable cursor
+   */
   enableCursor: boolean = true
 
+  /**
+   * @event
+   * @description
+   * Event fire when input change
+   */
   onChange?: (e: string | number) => void
+  /**
+   * @event
+   * @description
+   * Event fire when input focus
+   */
   onFocus?: () => void
+  /**
+   * @event
+   * @description
+   * Event fire when input blur
+   */
   onBlur?: () => void
 }
 
+/**
+ * A PIXI TextInput container
+*/
 export default class TextInput extends PIXI.Container {
 
+  /**
+   * Option of text input component
+   * Need to use @function redraw if Container is already render
+   */
   options: TextInputOption
 
+  /**
+   * PIXI text component
+   */
   private textComponent: PIXI.Text
+  /**
+   * PIXI Background component on blur
+   */
   private backgroundComponent: PIXI.Graphics
+  /**
+   * PIXI Background component on focus
+   */
   private backgroundComponentFocus: PIXI.Graphics
 
+  /**
+   * PIXI Cursor component on focus
+   */
   private cursorComponentBlind: PIXI.Graphics
+  /**
+   * PIXI Cursor component on focus
+   */
   private cursorComponentLow: PIXI.Graphics
 
+  /**
+   * true if focus
+   */
   private isFocus: boolean = false
-  cursorPosition: number
-  cursorLine: number = 0
-  private cursorWorldPosition: {x: number, y: number} = {x: 0, y:0}
+  /**
+   * Actual cursor position
+   */
+  private cursorPosition: number
+  /**
+   * Actual cursor position in the world
+   */
+  private cursorWorldPosition: { x: number, y: number } = { x: 0, y: 0 }
+  /**
+   * Status of cursor
+   */
+  private blindStatus: boolean = true
 
   private keyDownEventRef: any
   private blurEventRef: any
   private interval: number | undefined
-  private blindStatus: boolean = true
   private lastComponentHeight: number = 0
-
+  /**
+   * @constructor TextInput
+   * @param options Option for text input
+   */
   constructor(options: TextInputOption) {
     super()
 
     this.options = options
     this.textComponent = new PIXI.Text(this.GenerateValueDisplay())
+
     this.cursorPosition = this.options.value.length
     this.backgroundComponent = new PIXI.Graphics()
     this.backgroundComponentFocus = new PIXI.Graphics()
     this.cursorComponentBlind = new PIXI.Graphics()
     this.cursorComponentLow = new PIXI.Graphics()
-    this.DrawBackground()
-    this.DrawText()
+    this.redraw()
     this.backgroundComponentFocus.visible = false
     this.backgroundComponent.interactive = true
     this.backgroundComponent.buttonMode = true
@@ -106,39 +260,72 @@ export default class TextInput extends PIXI.Container {
     this.addChild(this.cursorComponentLow)
   }
 
+  /**
+   * Generate a display value of initialisation
+   */
   private GenerateValueDisplay(): string {
-    return this.options.value == "" ? this.options.placeHolder : this.options.value
+    let display = this.options.value == "" ? this.options.placeHolder : this.options.value
+    let style = new PIXI.TextStyle(this.options.style)
+    let textMesure = PIXI.TextMetrics.measureText(display, style, false).width
+    if (textMesure > this.options.width - 5) {
+      let displayWord = display.split(" ")
+      display = ""
+      let actualSentence = ""
+      let actualSentenceSize = 0
+      for (let wordKey in displayWord) {
+        let word = displayWord[wordKey]
+        let wordSize = PIXI.TextMetrics.measureText(word.concat(" "), style, false).width
+        if (actualSentenceSize + wordSize > this.options.width - 5) {
+          display += actualSentence.concat("\n")
+          actualSentence = ""
+          actualSentenceSize = 0
+        }
+        actualSentence += word.concat(" ")
+        actualSentenceSize += wordSize
+      }
+      display += actualSentence
+    }
+
+    return display
   }
 
-  private DrawCursor(){
+  /**
+   * Draw or redraw cursor graphics
+   */
+  private DrawCursor() {
     this.cursorComponentBlind.cacheAsBitmap = false
     this.cursorComponentBlind.clear()
     let style = this.options.cursorStyle
     this.cursorComponentBlind
-    .beginFill(style.colorBlind.color, style.colorBlind.alpha)
-    .drawRect(0, 0, style.width, this.options.style.fontSize + 4)
-    .endFill()
+      .beginFill(style.colorBlind.color, style.colorBlind.alpha)
+      .drawRect(0, 0, style.width, this.options.style.fontSize + 4)
+      .endFill()
     this.cursorComponentBlind.cacheAsBitmap = true
     this.cursorComponentBlind.pivot.y = (this.options.style.fontSize + 4) / 2
 
     this.cursorComponentLow.cacheAsBitmap = false
     this.cursorComponentLow.clear()
     this.cursorComponentLow
-    .beginFill(style.colorLow.color, style.colorLow.alpha)
-    .drawRect(0, 0, style.width, this.options.style.fontSize + 4)
-    .endFill()
+      .beginFill(style.colorLow.color, style.colorLow.alpha)
+      .drawRect(0, 0, style.width, this.options.style.fontSize + 4)
+      .endFill()
     this.cursorComponentLow.cacheAsBitmap = true
     this.cursorComponentLow.pivot.y = (this.options.style.fontSize + 4) / 2
   }
 
+  /**
+ * Draw or redraw background graphics
+ */
   private DrawBackground() {
 
-    let backgroundHeight = this.options.height
-    if(this.lastComponentHeight > backgroundHeight){
-      backgroundHeight = this.lastComponentHeight
-      if(this.options.maxHeight && backgroundHeight < this.options.maxHeight){
-        backgroundHeight = this.options.maxHeight
+    //Correct height of field
+    if (this.options.multiLine) {
+      this.lastComponentHeight = this.textComponent.height + this.options.paddingHeight
+      if (this.options.maxHeight && this.lastComponentHeight > this.options.maxHeight) {
+        this.lastComponentHeight = this.options.maxHeight
       }
+    } else {
+      this.lastComponentHeight = this.options.height
     }
 
     this.backgroundComponent.cacheAsBitmap = false
@@ -147,7 +334,7 @@ export default class TextInput extends PIXI.Container {
     this.backgroundComponent
       .lineStyle(option.borderWidth, option.borderColor.color, option.borderColor.alpha)
       .beginFill(option.backgroundColor.color, option.backgroundColor.alpha)
-      .drawRoundedRect(0, 0, option.width, backgroundHeight, option.roundedBorder)
+      .drawRoundedRect(0, 0, option.width, this.lastComponentHeight, option.roundedBorder)
       .endFill()
     this.backgroundComponent.cacheAsBitmap = true
     this.backgroundComponentFocus.cacheAsBitmap = false
@@ -155,11 +342,14 @@ export default class TextInput extends PIXI.Container {
     this.backgroundComponentFocus
       .lineStyle(option.borderWidth, option.borderColorFocus.color, option.borderColorFocus.alpha)
       .beginFill(option.backgroundColorFocus.color, option.backgroundColorFocus.alpha)
-      .drawRoundedRect(0, 0, option.width, backgroundHeight, option.roundedBorder)
+      .drawRoundedRect(0, 0, option.width, this.lastComponentHeight, option.roundedBorder)
       .endFill()
     this.backgroundComponentFocus.cacheAsBitmap = true
   }
 
+  /**
+   * Draw or redraw text component
+  */
   private DrawText() {
     let option = this.options;
 
@@ -169,7 +359,7 @@ export default class TextInput extends PIXI.Container {
       this.textComponent.x = option.width / 2
       this.textComponent.y = option.height / 2
     } else */
-     if (option.multiLine) {
+    if (option.multiLine) {
       this.textComponent.x = 5
       this.textComponent.y = 5
     } else {
@@ -180,15 +370,21 @@ export default class TextInput extends PIXI.Container {
     this.textComponent.style = option.style
   }
 
+  /**
+   * Redraw background - text or cursor to andle option change
+   */
   redraw() {
-    this.DrawBackground()
     this.DrawText()
-    if(this.options.enableCursor){
+    this.DrawBackground()
+    if (this.options.enableCursor && this.isFocus) {
       this.DrawCursor()
     }
   }
 
-
+  /**
+ *
+ * @param event Keyboard event
+ */
   private OnKeyDown(event: KeyboardEvent) {
     if (!this.isFocus) {
       return
@@ -201,7 +397,7 @@ export default class TextInput extends PIXI.Container {
     var lastText = this.textComponent.text
     //touche suppr
     if (event.keyCode == 8 && lastText.length > 0) {
-      this.fireTextChange(lastText, lastText.slice(0, this.cursorPosition - 1) + lastText.slice(this.cursorPosition), this.cursorPosition-1)
+      this.fireTextChange(lastText, lastText.slice(0, this.cursorPosition - 1) + lastText.slice(this.cursorPosition), this.cursorPosition - 1)
       return
     }
     //touche delete
@@ -210,7 +406,7 @@ export default class TextInput extends PIXI.Container {
       return
     }
 
-    if( event.keyCode >= 37 && event.keyCode <= 40 && this.options.enableCursor){
+    if (event.keyCode >= 37 && event.keyCode <= 40 && this.options.enableCursor) {
       this.useKeyboardPosition(event.keyCode)
       return
     }
@@ -225,17 +421,17 @@ export default class TextInput extends PIXI.Container {
     }
 
     //Petit manipulation pour ne pas avoir a recalculer la taille du container
-    var newText= lastText.slice(0, this.cursorPosition) + event.key+ lastText.slice(this.cursorPosition)
+    var newText = lastText.slice(0, this.cursorPosition) + event.key + lastText.slice(this.cursorPosition)
     this.textComponent.text = newText
     let newComponentSize = this.textComponent.width
     this.textComponent.text = lastText
     //Si la taille dépasse pas le container
-    if (newComponentSize  > this.options.width - this.options.style.fontSize) {
-      if(!this.options.multiLine){
+    if (newComponentSize > this.options.width - this.options.style.fontSize) {
+      if (!this.options.multiLine) {
         return
       }
       let breakPosition: number = lastText.lastIndexOf(" ")
-      if(this.options.wordWrapType == "break-all" || breakPosition == -1){
+      if (this.options.wordWrapType == "break-all" || breakPosition == -1) {
         newText = this.addStringIntoStringAt(lastText, this.cursorPosition, "\n".concat(event.key))
         this.cursorPosition += 1
       } else {
@@ -245,9 +441,9 @@ export default class TextInput extends PIXI.Container {
     }
 
     if (this.options.onlyNumber) {
-      if(!isNaN(Number(newText))){
+      if (!isNaN(Number(newText))) {
         var value = parseFloat(newText)
-        if(value < this.options.min || value > this.options.max){
+        if (value < this.options.min || value > this.options.max) {
           return;
         }
       } else {
@@ -259,15 +455,36 @@ export default class TextInput extends PIXI.Container {
     this.fireTextChange(lastText, newText, this.cursorPosition + 1)
   }
 
-  addStringIntoStringAt(key: string, index: number, value: string) : string{
+
+  /**
+   *
+   * @param key Key string
+   * @param index position to add value
+   * @param value string to add
+   */
+  private addStringIntoStringAt(key: string, index: number, value: string): string {
     return key.slice(0, index).concat(value).concat(key.slice(index))
   }
-  replaceCharIntoStringAt(key: string, index: number, value: string) : string{
-    return key.slice(0, index).concat(value).concat(key.slice(index +1))
+  /**
+   *
+   * @param key Key string
+   * @param index position to replace char
+   * @param value string to replace
+   */
+  private replaceCharIntoStringAt(key: string, index: number, value: string): string {
+    return key.slice(0, index).concat(value).concat(key.slice(index + 1))
   }
 
-  useKeyboardPosition(keyCode: number){
-    switch(keyCode){
+  /**
+   *
+   * @param keyCode
+   * Keycode: 37 for right
+   *          38 for up
+   *          39 for left
+   *          40 for bottom
+   */
+  useKeyboardPosition(keyCode: number) {
+    switch (keyCode) {
       case 37:
         //Gauche
         this.changeCursorPosition(this.cursorPosition - 1)
@@ -286,11 +503,16 @@ export default class TextInput extends PIXI.Container {
         break
     }
   }
-  changeCursorPosition(position: number){
-    if(position < 0){
+
+  /**
+   * Set new cursor position
+   * @param position position to set
+   */
+  changeCursorPosition(position: number) {
+    if (position < 0) {
       return false
     }
-    if(position > this.textComponent.text.length){
+    if (position > this.textComponent.text.length) {
       return false
     }
     this.cursorPosition = position
@@ -299,29 +521,43 @@ export default class TextInput extends PIXI.Container {
     return true
   }
 
-  fireTextChange(lastValue: string, newValue: string, cursorPosition: number){
+  /**
+   * Update text
+   * @param lastValue last value
+   * @param newValue new value
+   * @param cursorPosition new cursor position after change
+   */
+  fireTextChange(lastValue: string, newValue: string, cursorPosition: number) {
     this.options.value = newValue
     this.textComponent.text = newValue
 
     this.cursorPosition = cursorPosition
-    if(this.options.onChange != undefined){
+    if (this.options.onChange != undefined) {
       this.options.onChange(this.options.onlyNumber ? this.textComponent.text : parseFloat(this.textComponent.text))
     }
-    if(this.textComponent.height - this.lastComponentHeight  > 0
-      || this.lastComponentHeight - this.textComponent.height > this.options.style.fontSize ){
-      this.lastComponentHeight = this.textComponent.height + this.options.style.fontSize
+    if (this.textComponent.height - this.lastComponentHeight > 0) {
       this.redraw()
     }
 
     this.changeCursorPosition(cursorPosition)
   }
 
-  private calculateTextMetrics() : PIXI.TextMetrics {
-    return PIXI.TextMetrics.measureText(this.textComponent.text, this.textComponent.style, true)
+  /**
+   * Calculate size of the text
+   */
+  calculateValueMetrics(): PIXI.TextMetrics {
+    return PIXI.TextMetrics.measureText(this.textComponent.text, this.textComponent.style, false)
   }
 
-  private calculateCursorPosition() : {metrix: PIXI.TextMetrics, line: number, positionInLine: number, afterCursorLine: string}{
-    let metrix = this.calculateTextMetrics()
+  /**
+   * calculate
+   *  metrix
+   *  cursor line
+   *  position in line
+   *  text after cursor in line
+   */
+  private calculateCursorPosition(): { metrix: PIXI.TextMetrics, line: number, positionInLine: number, afterCursorLine: string } {
+    let metrix = this.calculateValueMetrics()
     let cursorLine = 0
     let positionInLine = 0
     let afterCursorLine = ""
@@ -329,7 +565,7 @@ export default class TextInput extends PIXI.Container {
 
     let line = metrix.text.split("\n")
     //On regarde dans toutes les lignes
-    for(let value in line) {
+    for (let value in line) {
       //On enregistre la longueurs des anciennes lignes
       let lastLocation = actualLocationLoop
       let e: string = line[value]
@@ -338,7 +574,7 @@ export default class TextInput extends PIXI.Container {
       //Si la position du curseur est inférieur ou égale à la longueurs de toutes les lignes
       //On ajoute le nombre de ligne car une ligne dispose de un curseur en fin de ligne
       //Si le curseur est dans cette ligne
-      if(this.cursorPosition <= actualLocationLoop + cursorLine ){
+      if (this.cursorPosition <= actualLocationLoop + cursorLine) {
         //On recupere la position du curseur dans la ligne actuel
         positionInLine = this.cursorPosition - lastLocation - cursorLine//ERROR
         //On recupere la phrase avant le curseur pour calculer sa longueur
@@ -347,24 +583,33 @@ export default class TextInput extends PIXI.Container {
       }
       cursorLine += 1;
     }
-    return {metrix: metrix, line: cursorLine, positionInLine: positionInLine, afterCursorLine: afterCursorLine}
+    return { metrix: metrix, line: cursorLine, positionInLine: positionInLine, afterCursorLine: afterCursorLine }
   }
 
-  private calculateCursorLocation() : {x: number, y:number}
-  {
+  /**
+   * Calculate cursor location in container
+   */
+  private calculateCursorLocation(): { x: number, y: number } {
     let position = this.calculateCursorPosition()
     let y = 0
-    if(position.line == 0){
+    if (position.line == 0) {
       y = this.options.height / 2
     } else {
-      y =  (position.line * (position.metrix.lineHeight)) + this.options.height / 2
+      y = (position.line * (position.metrix.lineHeight)) + this.options.height / 2
     }
     let x = PIXI.TextMetrics.measureText(position.afterCursorLine, this.textComponent.style, false).width
-    + this.options.cursorStyle.distance
-    return {x:x, y:y}
+      + this.options.cursorStyle.distance
+    return { x: x, y: y }
   }
 
-  private displayCursor(visible: boolean, blind: boolean, position: {x: number, y: number}) {
+  /**
+   * Change display cursor status
+   *
+   * @param visible cursor is visible ?
+   * @param blind cursor is blind ?
+   * @param position cursor position
+   */
+  private displayCursor(visible: boolean, blind: boolean, position: { x: number, y: number }) {
     this.cursorComponentBlind.visible = visible ? !blind : false
     this.cursorComponentLow.visible = visible ? blind : false
     this.cursorComponentBlind.x = position.x
@@ -373,35 +618,51 @@ export default class TextInput extends PIXI.Container {
     this.cursorComponentLow.y = position.y
   }
 
-  private cursorTimerEvent(){
+  /**
+   * Event for cursor refresh
+   */
+  private cursorTimerEvent() {
     this.blindStatus = !this.blindStatus
     this.displayCursor(true, this.blindStatus, this.cursorWorldPosition)
   }
 
+
+  /**
+   * display background focus or blur
+   * @param focus true if focus
+   */
   private displayBackground(focus: boolean) {
     this.backgroundComponent.visible = !focus
     this.backgroundComponentFocus.visible = focus
   }
 
+  /**
+   * Add event after focus
+   */
   private AddEvent() {
     this.keyDownEventRef = this.OnKeyDown.bind(this)
     this.blurEventRef = this.blur.bind(this)
     window.addEventListener("keydown", this.keyDownEventRef);
     window.addEventListener("mousedown", this.blurEventRef);
-    if(this.options.enableCursor){
+    if (this.options.enableCursor) {
       this.interval = window.setInterval(this.cursorTimerEvent.bind(this), this.options.cursorStyle.speedSwap)
     }
   }
-
+  /**
+   * Add event after blind
+   */
   private RemoveEvent() {
     window.removeEventListener("keydown", this.keyDownEventRef);
     window.removeEventListener("mousedown", this.blurEventRef);
-    if(this.options.enableCursor){
+    if (this.options.enableCursor) {
       window.clearInterval(this.interval)
     }
   }
 
 
+  /**
+   * Set focus to component, force keyboard event to it
+   */
   focus() {
     if (this.isFocus) {
       return;
@@ -409,28 +670,30 @@ export default class TextInput extends PIXI.Container {
     this.displayBackground(true)
     this.AddEvent()
     this.isFocus = true
-    console.log("focus")
     //remove placeholder
     this.textComponent.text = this.options.value
-    if(this.options.onFocus != undefined){
+    if (this.options.onFocus != undefined) {
       this.options.onFocus()
     }
   }
 
+  /**
+   * Set blur to component, remove event
+   */
   blur() {
     if (!this.isFocus) {
       return;
     }
     this.displayBackground(false)
     this.RemoveEvent()
-    this.displayCursor(false, false, {x: 0, y:0})
+    this.displayCursor(false, false, { x: 0, y: 0 })
 
     //regenerate display
     this.textComponent.text = this.GenerateValueDisplay()
 
 
     this.isFocus = false
-    if(this.options.onBlur != undefined){
+    if (this.options.onBlur != undefined) {
       this.options.onBlur()
     }
   }

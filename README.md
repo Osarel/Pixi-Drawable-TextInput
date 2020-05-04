@@ -77,8 +77,8 @@ option.value = "A complexe text input";
 
 option.cursorStyle = new TextInputCursorStyle();
 option.cursorStyle.distance = 0;
-option.cursorStyle.colorBlind = { color: 0xff0000, aplha: 1 };
-option.cursorStyle.colorLow = { color: 0x000000, aplha: 0.5 };
+option.cursorStyle.colorBlind = { color: 0xff0000, alpha: 1 };
+option.cursorStyle.colorLow = { color: 0x000000, alpha: 0.5 };
 option.cursorStyle.width = 10;
 option.cursorStyle.speedSwap = 200;
 var input = new TextInput(option);
@@ -101,9 +101,9 @@ The project is open to any new proposal and correction pull request and issues I
 - [x] Add development test server
 - [x] Fix placeholder
 - [x] Fix alpha cursor
-- [ ] Fix input out of field
-- [ ] Create a documentation
-
+- [x] Update height component for multiline
+- [x] Fix input out of field
+- [x] Create a documentation
 - [x] Fix cursor field empty
 
 ### Futur
