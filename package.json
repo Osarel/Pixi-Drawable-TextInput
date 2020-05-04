@@ -32,7 +32,6 @@
     "typescript": "^3.8.3"
   },
   "dependencies": {
-    "pixi-drawable-textinput": "^1.0.1",
     "pixi.js": "^5.2.3"
   }
 }
