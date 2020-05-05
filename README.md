@@ -1,8 +1,12 @@
 # Pixi-Drawable-TextInput
  You need to create a text input with pixi but you don't want to use the dom of the canvas, this plugin allows you to draw your own text input
 
+## Documentation
+
+[Documentation link](https://www.craphael.fr/pixi/index.html)
 
 ## Installation :
+
 You can install pixi drawable text input with standard npm
 
 `npm install pixi-drawable-textinput`

@@ -7,7 +7,7 @@
   "scripts": {
     "start": "parcel exemple/index.html -d .cache --open",
     "build": "npx tsc",
-    "doc": "npx typedoc --out docs"
+    "doc": "npx typedoc --out docs --name 'Pixi Drawable TextInput' --hideGenerator"
   },
   "repository": "https://github.com/Osarel/Pixi-Drawable-TextInput.git",
   "author": "Osarel <raphael.carvalho39@hotmail.com>",
@@ -25,7 +25,7 @@
   "bugs": {
     "url": "https://github.com/Osarel/Pixi-Drawable-TextInput/issues"
   },
-  "homepage": "https://osarel.github.io/Pixi-Drawable-TextInput/",
+  "homepage": "https://www.craphael.fr/pixi/index.html",
   "devDependencies": {
     "parcel-bundler": "^1.12.4",
     "typedoc": "^0.17.6",
