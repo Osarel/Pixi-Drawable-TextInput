@@ -22,19 +22,18 @@ Or with yarn
 ```typescript
 import "./styles.css";
 import * as PIXI from "pixi.js";
-import TextInput, { TextInputOption } from "pixi-drawable-textinput";
+import TextInput, {InputOption} from "../../dist/TextInput";
 const app = new PIXI.Application({
   width: 400,
   height: 200,
   backgroundColor: 0x1099bb
 });
 document.body.appendChild(app.view);
-var option = new TextInputOption();
-option.multiLine = true;
+
+var option = new InputOption();
 option.style = { fontSize: 12 };
 option.value = "A simple text input";
 var input = new TextInput(option);
-
 app.stage.addChild(input);
 ```
 
@@ -44,17 +43,14 @@ app.stage.addChild(input);
 
 ```typescript
 import * as PIXI from "pixi.js";
-import TextInput, {
-  TextInputOption,
-  TextInputCursorStyle
-} from "pixi-drawable-textinput";
+import TextInput, {InputOption, InputCursorStyle} from "pixi-drawable-textinput";
 const app = new PIXI.Application({
   width: 800,
   height: 400,
   backgroundColor: 0x1099bb
 });
-document.body.appendChild(app.view);
-var option = new TextInputOption();
+
+var option = new InputOption();
 option.backgroundColorFocus = { color: 0xcffbff, aplha: 1 };
 option.backgroundColor = { color: 0xe02f5e, aplha: 1 };
 option.multiLine = true;
@@ -74,21 +70,18 @@ option.style = {
   dropShadowBlur: 4,
   dropShadowAngle: Math.PI / 6,
   dropShadowDistance: 6
-};
+  };
 option.height = 60;
 option.width = 400;
 option.value = "A complexe text input";
 
-option.cursorStyle = new TextInputCursorStyle();
+option.cursorStyle = new InputCursorStyle();
 option.cursorStyle.distance = 0;
 option.cursorStyle.colorBlind = { color: 0xff0000, alpha: 1 };
-option.cursorStyle.colorLow = { color: 0x000000, alpha: 0.5 };
+option.cursorStyle.colorLow = { color: 0x00ffff, alpha: 0.5 };
 option.cursorStyle.width = 10;
 option.cursorStyle.speedSwap = 200;
 var input = new TextInput(option);
-
-input.x = 10;
-input.y = 10;
 
 app.stage.addChild(input);
 
@@ -99,6 +92,12 @@ app.stage.addChild(input);
 ## to-do list
 
 The project is open to any new proposal and correction pull request and issues I will take the necessary measures to advance the project
+
+### V1.0.3
+
+- [x] Update documentation
+- [x] Fix import
+- [x] Fix package
 
 ### V1.0.2
 
