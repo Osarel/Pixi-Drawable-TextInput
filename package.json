@@ -1,6 +1,6 @@
 {
   "name": "pixi-drawable-textinput",
-  "version": "1.0.3",
+  "version": "1.0.31",
   "main": "dist/TextInput.js",
   "types": "dist/TextInput.d.ts",
   "description": "Simple way to create your own PIXI Text Input",

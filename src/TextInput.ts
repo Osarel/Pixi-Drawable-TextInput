@@ -362,7 +362,7 @@ export class TextInput extends PIXI.Container {
 
     this.cursorPosition = cursorPosition
     if (this.options.onChange != undefined) {
-      this.options.onChange(this.options.onlyNumber ? this.textComponent.text : parseFloat(this.textComponent.text))
+      this.options.onChange(this.options.onlyNumber ? parseFloat(this.textComponent.text) : this.textComponent.text)
     }
     if (this.textComponent.height - this.lastComponentHeight > 0) {
       this.redraw()
