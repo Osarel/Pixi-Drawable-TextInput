@@ -1,7 +1,7 @@
-import TextInput, { TextInputOption, TextInputCursorStyle } from "../../dist/TextInput";
+import TextInput, {InputOption, InputCursorStyle} from "../../dist/TextInput";
 
 export function GenerateComplexeTextInput() {
-  var option = new TextInputOption();
+  var option = new InputOption();
   option.backgroundColorFocus = { color: 0xcffbff, aplha: 1 };
   option.backgroundColor = { color: 0xe02f5e, aplha: 1 };
   option.multiLine = true;
@@ -26,7 +26,7 @@ export function GenerateComplexeTextInput() {
   option.width = 400;
   option.value = "A complexe text input";
 
-  option.cursorStyle = new TextInputCursorStyle();
+  option.cursorStyle = new InputCursorStyle();
   option.cursorStyle.distance = 0;
   option.cursorStyle.colorBlind = { color: 0xff0000, alpha: 1 };
   option.cursorStyle.colorLow = { color: 0x00ffff, alpha: 0.5 };

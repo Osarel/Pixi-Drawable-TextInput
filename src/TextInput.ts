@@ -1,193 +1,22 @@
 import * as PIXI from 'pixi.js'
+import { InputOption } from './utils/InputOption'
 
-/**
- * Cursor style class
- */
-export class TextInputCursorStyle {
-  /**
-   * Width of the cursor
-   */
-  width: number = 4
-  /**
-  Color on blind
-  */
-  colorBlind: TextInputColor = { color: 0x69a7ff, alpha: 1 }
-  /**
-   * Color on low
-   */
-  colorLow: TextInputColor = { color: 0x69a7ff, alpha: 0.5 }
-  /**
-   * Distance from text
-   */
-  distance: number = 6
-  /**
-   * Swap speed of the cursor
-   */
-  speedSwap: number = 500
-}
-/**
- * Color class
- */
-export class TextInputColor {
-  /**
-   * @description
-   * An hexadecimal number of color exemple  '0x000000'
-   */
-  color: number = 0x000000
-  /**
-   * @description
-   * A alpha color need to be from 0 to 1
-   */
-  alpha: number = 1
-}
-/**
- * PIXI text input style
- */
-export class TextInputFontStyle {
-  fontFamily?: string = "Arial"
-  fontSize: number = 14
-  fontStyle?: string
-  fontWeight?: string
-  fill?: string[]
-  stroke?: string
-  strokeThickness?: number
-  dropShadow?: boolean
-  dropShadowColor?: string
-  dropShadowBlur?: number
-  dropShadowAngle?: number
-  dropShadowDistance?: number
-}
-/**
- * Text input settings class
- */
-export class TextInputOption {
-  /**
-   * Color of the background
-   */
-  backgroundColor: TextInputColor = { color: 0xffffff, alpha: 0.5 }
-  /**
-   * Color of the background when focus
-   */
-  backgroundColorFocus: TextInputColor = { color: 0xffffff, alpha: 1 }
 
-  /**
-   * Width of the input it was static
-   */
-  width: number = 120
-  /**
-   * Height of the input it was dynamic if input is multiline
-   */
-  height: number = 25
-  /**
-   * Padding height on text
-   */
-  paddingHeight: number = 10
-  /**
-   * Max Height of the input use in multiline input
-   */
-  maxHeight?: number
-
-  /**
-   * Style of the input text
-   */
-  style: TextInputFontStyle = new TextInputFontStyle()
-  /**
-   * Placeholder when input is empty and blur
-   */
-  placeHolder: string = ""
-  /**
-   * Current value
-   */
-  value: string = ""
-  /**
-   * Max length of value
-   */
-  maxLength: number = -1
-
-  /**
-   * Border style rounded
-   */
-  roundedBorder: number = 0
-  /**
-   * Border style color
-   */
-  borderColor: TextInputColor = { color: 0, alpha: 1 }
-  /**
-   * Border style color on focus
-   */
-  borderColorFocus: TextInputColor = { color: 0, alpha: 1 }
-  /**
-   * Border width
-   */
-  borderWidth: number = 2
-
-  /**
-   * If multiline height is dynamics
-   * wordWrapType take effect and wrap word when is to huge
-   * default is false
-   */
-  multiLine: boolean = false
-  /**
-   * Word wrap type
-   * break-work :  break word at last space characters
-   * break-all : break word at last characters
-  */
-  wordWrapType: "break-word" | "break-all" = "break-word"
-  /**
-   * Only allow Number typing in the text input
-   * Default is false
-  */
-  onlyNumber: boolean = false
-  /**
-   * if only number set minimum number to reach
-   * Default is Number.MIN_VALUE
-  */
-  min: number = Number.MIN_VALUE
-  /**
-   * if only number set maximum number to reach
-   * Default is Number.MAX_VALUE
-  */
-  max: number = Number.MAX_VALUE
-
-  /**
-   * Change cursor style
-   */
-  cursorStyle: TextInputCursorStyle = new TextInputCursorStyle()
-  /**
-   * Enable or disable cursor
-   */
-  enableCursor: boolean = true
-
-  /**
-   * @event
-   * @description
-   * Event fire when input change
-   */
-  onChange?: (e: string | number) => void
-  /**
-   * @event
-   * @description
-   * Event fire when input focus
-   */
-  onFocus?: () => void
-  /**
-   * @event
-   * @description
-   * Event fire when input blur
-   */
-  onBlur?: () => void
-}
+export { InputOption } from './utils/InputOption'
+export { InputCursorStyle } from './utils/InputCursorStyle'
+export { InputFontStyle } from './utils/InputFontStyle'
+export  { InputColor } from './utils/InputColor'
 
 /**
  * A PIXI TextInput container
 */
-export default class TextInput extends PIXI.Container {
+export class TextInput extends PIXI.Container {
 
   /**
    * Option of text input component
    * Need to use @function redraw if Container is already render
    */
-  options: TextInputOption
+  options: InputOption
 
   /**
    * PIXI text component
@@ -236,7 +65,7 @@ export default class TextInput extends PIXI.Container {
    * @constructor TextInput
    * @param options Option for text input
    */
-  constructor(options: TextInputOption) {
+  constructor(options: InputOption) {
     super()
 
     this.options = options
@@ -698,3 +527,5 @@ export default class TextInput extends PIXI.Container {
     }
   }
 }
+
+export default TextInput

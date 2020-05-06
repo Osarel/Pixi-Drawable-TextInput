@@ -1,7 +1,7 @@
-import TextInput, { TextInputOption } from "../../dist/TextInput";
+import TextInput, {InputOption} from "../../dist/TextInput";
 
 export function GeneratePlaceHolderInput() {
-  var option = new TextInputOption();
+  var option = new InputOption();
   option.multiLine = true;
   option.style = { fontSize: 14 };
   option.height = 20
