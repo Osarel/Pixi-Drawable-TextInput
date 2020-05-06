@@ -1,5 +1,4 @@
 import * as PIXI from "pixi.js"
-import TextInput, { TextInputOption } from "pixi-drawable-textinput";
 import { GenerateComplexeTextInput } from "./TextInput/complexeInput";
 import { GenerateSimpleTextInput } from "./TextInput/simpleInput";
 import { GeneratePlaceHolderInput } from "./TextInput/placeholderInput";
