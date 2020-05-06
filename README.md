@@ -20,9 +20,8 @@ Or with yarn
 
 ### Simple text input
 ```typescript
-import "./styles.css";
 import * as PIXI from "pixi.js";
-import TextInput, {InputOption} from "../../dist/TextInput";
+import TextInput, {InputOption} from "pixi-drawable-textinput";
 const app = new PIXI.Application({
   width: 400,
   height: 200,
@@ -49,7 +48,7 @@ const app = new PIXI.Application({
   height: 400,
   backgroundColor: 0x1099bb
 });
-
+document.body.appendChild(app.view);
 var option = new InputOption();
 option.backgroundColorFocus = { color: 0xcffbff, aplha: 1 };
 option.backgroundColor = { color: 0xe02f5e, aplha: 1 };
