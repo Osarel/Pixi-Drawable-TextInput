@@ -92,6 +92,10 @@ app.stage.addChild(input);
 
 The project is open to any new proposal and correction pull request and issues I will take the necessary measures to advance the project
 
+### V1.0.32
+
+- [x] Fix cursor do not display
+
 ### V1.0.3
 
 - [x] Update documentation
