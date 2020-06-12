@@ -1,4 +1,4 @@
-import TextInput, {InputOption, InputCursorStyle} from "../../dist/TextInput";
+import TextInput, {InputOption, InputCursorStyle} from "../../dist/TextInput/TextInput";
 
 export function GenerateComplexeTextInput() {
   var option = new InputOption();

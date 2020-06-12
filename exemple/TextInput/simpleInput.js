@@ -1,4 +1,4 @@
-import TextInput, {InputOption} from "../../dist/TextInput";
+import TextInput, {InputOption} from "../../dist/TextInput/TextInput";
 
 export function GenerateSimpleTextInput() {
   var option = new InputOption();

@@ -76,7 +76,9 @@ export class TextInput extends PIXI.Container {
     this.backgroundComponentFocus = new PIXI.Graphics()
     this.cursorComponentBlind = new PIXI.Graphics()
     this.cursorComponentLow = new PIXI.Graphics()
+
     this.redraw()
+
     this.backgroundComponentFocus.visible = false
     this.backgroundComponent.interactive = true
     this.backgroundComponent.buttonMode = true
@@ -130,6 +132,7 @@ export class TextInput extends PIXI.Container {
       .drawRect(0, 0, style.width, this.options.style.fontSize + 4)
       .endFill()
     this.cursorComponentBlind.cacheAsBitmap = true
+    this.cursorComponentBlind.visible = false
     this.cursorComponentBlind.pivot.y = (this.options.style.fontSize + 4) / 2
 
     this.cursorComponentLow.cacheAsBitmap = false
@@ -138,6 +141,7 @@ export class TextInput extends PIXI.Container {
       .beginFill(style.colorLow.color, style.colorLow.alpha)
       .drawRect(0, 0, style.width, this.options.style.fontSize + 4)
       .endFill()
+    this.cursorComponentLow.visible = false
     this.cursorComponentLow.cacheAsBitmap = true
     this.cursorComponentLow.pivot.y = (this.options.style.fontSize + 4) / 2
   }
@@ -205,7 +209,7 @@ export class TextInput extends PIXI.Container {
   redraw() {
     this.DrawText()
     this.DrawBackground()
-    if (this.options.enableCursor && this.isFocus) {
+    if(this.options.enableCursor){
       this.DrawCursor()
     }
   }
@@ -338,6 +342,9 @@ export class TextInput extends PIXI.Container {
    * @param position position to set
    */
   changeCursorPosition(position: number) {
+    if(!this.options.enableCursor){
+      return false
+    }
     if (position < 0) {
       return false
     }
@@ -501,6 +508,9 @@ export class TextInput extends PIXI.Container {
     this.isFocus = true
     //remove placeholder
     this.textComponent.text = this.options.value
+
+    this.changeCursorPosition(this.cursorPosition)
+
     if (this.options.onFocus != undefined) {
       this.options.onFocus()
     }
