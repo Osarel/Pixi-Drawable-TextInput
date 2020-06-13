@@ -1,6 +1,6 @@
 {
   "name": "pixi-drawable-textinput",
-  "version": "1.0.32",
+  "version": "1.0.33",
   "main": "dist/TextInput.js",
   "types": "dist/TextInput.d.ts",
   "description": "Simple way to create your own PIXI Text Input",
@@ -26,7 +26,7 @@
   "bugs": {
     "url": "https://github.com/Osarel/Pixi-Drawable-TextInput/issues"
   },
-  "homepage": "https://www.craphael.fr/pixi/index.html",
+  "homepage": "https://osarel.github.io/Pixi-Drawable-TextInput/",
   "devDependencies": {
     "parcel-bundler": "^1.12.4",
     "typedoc": "^0.17.6",

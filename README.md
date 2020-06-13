@@ -3,7 +3,7 @@
 
 ## Documentation
 
-[Documentation link](https://www.craphael.fr/pixi/index.html)
+[Documentation link](https://osarel.github.io/Pixi-Drawable-TextInput/)
 
 ## Installation :
 
