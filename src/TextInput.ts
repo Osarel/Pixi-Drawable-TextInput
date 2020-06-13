@@ -1,11 +1,11 @@
 import * as PIXI from 'pixi.js'
-import { InputOption } from './utils/InputOption'
+import { InputOption } from './TextInput/InputOption'
 
 
-export { InputOption } from './utils/InputOption'
-export { InputCursorStyle } from './utils/InputCursorStyle'
-export { InputFontStyle } from './utils/InputFontStyle'
-export  { InputColor } from './utils/InputColor'
+export { InputOption } from './TextInput/InputOption'
+export { InputCursorStyle } from './TextInput/InputCursorStyle'
+export { InputFontStyle } from './TextInput/InputFontStyle'
+export  { InputColor } from './TextInput/InputColor'
 
 /**
  * A PIXI TextInput container
