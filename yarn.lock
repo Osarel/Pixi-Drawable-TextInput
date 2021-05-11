@@ -3425,9 +3425,9 @@ lodash.uniq@^4.5.0:
   integrity sha1-0CJTc662Uq3BvILklFM5qEJ1R3M=
 
 lodash@^4.17.13, lodash@^4.17.15, lodash@^4.17.4:
-  version "4.17.15"
-  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
-  integrity sha512-8xOcRHvCjnocdS5cpwXQXVzmmh5e5+saE2QGoeQmbKmRS6J3VQppPOIt0MnmE+4xlZoumy0GPG0D0MVIQbNA1A==
+  version "4.17.21"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
+  integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
 
 log-symbols@^2.2.0:
   version "2.2.0"
@@ -4055,13 +4055,6 @@ physical-cpu-count@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/physical-cpu-count/-/physical-cpu-count-2.0.0.tgz#18de2f97e4bf7a9551ad7511942b5496f7aba660"
   integrity sha1-GN4vl+S/epVRrXURlCtUlverpmA=
-
-pixi-drawable-textinput@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/pixi-drawable-textinput/-/pixi-drawable-textinput-1.0.1.tgz#e06e316ee0795490cd1e98b0bdf60c3a5cec9565"
-  integrity sha512-ySu0UFsFRpuEiiPEWYZ3AIiZY3MlZ/scEQTYhnDJfXS+pCx7t7S93c7eipRgcnFEpggUX+/kUVuFBqm9NaG4TQ==
-  dependencies:
-    pixi.js "^5.2.3"
 
 pixi.js@^5.2.3:
   version "5.2.3"
