@@ -4031,9 +4031,9 @@ path-key@^2.0.1:
   integrity sha1-QRyttXTFoUDTpLGRDUDYDMn0C0A=
 
 path-parse@^1.0.6:
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/path-parse/-/path-parse-1.0.6.tgz#d62dbb5679405d72c4737ec58600e9ddcf06d24c"
-  integrity sha512-GSmOT2EbHrINBf9SR7CDELwlJ8AENk3Qn7OikK4nFYAu3Ote2+JYNVvkpAEQm3/TLNEJFD/xZJjzyxg3KBWOzw==
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/path-parse/-/path-parse-1.0.7.tgz#fbc114b60ca42b30d9daf5858e4bd68bbedb6735"
+  integrity sha512-LDJzPVEEEPR+y48z93A0Ed0yXb8pAByGWo/k5YYdYgpY2/2EsOsksJrq7lOHxryrVOn1ejG6oAp8ahvOIQD8sw==
 
 pbkdf2@^3.0.3:
   version "3.0.17"
@@ -4055,13 +4055,6 @@ physical-cpu-count@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/physical-cpu-count/-/physical-cpu-count-2.0.0.tgz#18de2f97e4bf7a9551ad7511942b5496f7aba660"
   integrity sha1-GN4vl+S/epVRrXURlCtUlverpmA=
-
-pixi-drawable-textinput@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/pixi-drawable-textinput/-/pixi-drawable-textinput-1.0.1.tgz#e06e316ee0795490cd1e98b0bdf60c3a5cec9565"
-  integrity sha512-ySu0UFsFRpuEiiPEWYZ3AIiZY3MlZ/scEQTYhnDJfXS+pCx7t7S93c7eipRgcnFEpggUX+/kUVuFBqm9NaG4TQ==
-  dependencies:
-    pixi.js "^5.2.3"
 
 pixi.js@^5.2.3:
   version "5.2.3"
